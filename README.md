@@ -1,165 +1,267 @@
-<p align="left">
-  <img src="https://img.shields.io/badge/Python-3.10-blue.svg" alt="Python Version"/>
-  <img src="https://img.shields.io/badge/FastAPI-API%20Backend-brightgreen.svg" alt="FastAPI"/>
-  <img src="https://img.shields.io/badge/ML-Model-orange.svg" alt="Machine Learning"/>
-  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License"/>
-  <img src="https://img.shields.io/github/last-commit/radha1805/symptom-checker-ml" alt="Last Commit"/>
-  <img src="https://img.shields.io/github/repo-size/radha1805/symptom-checker-ml" alt="Repo Size"/>
-</p>
-
-
-# Symptom Checker ML Model
-
-An AI-based symptom checker designed with a complete ML training pipeline, multilingual support, and a deployment-ready FastAPI backend.
+# 🩺 SYMPTOSURE – Smart Symptom Severity & Care Assistant
 
 ## 📌 Overview
 
-This project implements a machine learning model that predicts possible diseases based on user-provided symptoms.  
-It includes preprocessing, feature engineering, model training, inferencing APIs, multilingual handling, and Docker-based deployment.  
-The architecture is clean, modular, and suitable for real-world telemedicine workflows.
+SYMPTOSURE is an AI-powered healthcare assistance system that predicts diseases from user symptoms using Machine Learning. The system accepts symptoms through text and voice input, performs symptom analysis, predicts possible diseases, classifies severity levels, detects emergency conditions, and provides healthcare guidance.
+
+The project integrates Machine Learning, FastAPI, MongoDB, multilingual processing, and speech technologies to deliver real-time healthcare assistance.
 
 ---
 
 ## 🚀 Features
 
-- **Machine Learning Model** for symptom-based disease prediction  
-- **Training Pipeline** with preprocessing, feature engineering, and evaluation  
-- **Prediction API (FastAPI)** exposing inference endpoints  
-- **Multilingual Support** (English, Hindi, Punjabi)  
-- **Speech-to-Text & Text-to-Speech Support** (local + cloud options)  
-- **Docker Deployment** for easy containerization  
-- **Clean Modular Architecture** for scalability  
+- Disease prediction using Machine Learning
+- Symptom analysis and preprocessing
+- Text and Voice-based symptom input
+- Multilingual support
+- Severity classification (Low / Medium / High)
+- Emergency (Red-Flag) symptom detection
+- Healthcare guidance and precautions
+- Suggested medical tests
+- OTC recommendation support
+- User authentication
+- Health report generation
+- Prediction history tracking
+- MongoDB integration
+- REST API architecture using FastAPI
 
 ---
 
-## 📁 Project Structure
+## 🏗️ System Workflow
 
-```
-symptoms_checker/
-│
-├── api.py                     # FastAPI prediction server
-├── train_model.py             # Model training script
-├── feature_engineer.py        # Feature extraction & preprocessing
-├── symptom_extractor.py       # Extracts symptom keywords
-├── translator.py              # Multilingual translation logic
-├── stt_tts.py                 # Speech-to-text and text-to-speech
-│
-├── artifacts/                 # Saved ML models and encoders
-├── tests/                     # Test suite
-│
-├── requirements.txt           # Dependencies
-├── Dockerfile                 # Deployment configuration
-└── README.md                  # Documentation
+```text
+User Input (Text / Voice)
+          │
+          ▼
+Symptom Extraction & Mapping
+          │
+          ▼
+Feature Engineering
+(MultiLabelBinarizer)
+          │
+          ▼
+Random Forest Model
+          │
+          ▼
+Disease Prediction
+          │
+          ▼
+Severity Classification
+          │
+          ▼
+Emergency Detection
+          │
+          ▼
+Healthcare Guidance
+          │
+          ▼
+Report Generation
+          │
+          ▼
+MongoDB Storage
 ```
 
 ---
 
-## 🔧 Installation
+## 🛠️ Technologies Used
 
-### 1. Clone the repository
-```
-git clone https://github.com/yourusername/symptom-checker-ml.git
-cd symptom-checker-ml
+### Backend
+- FastAPI
+- Python
+
+### Machine Learning
+- Scikit-Learn
+- Random Forest Classifier
+
+### Database
+- MongoDB
+- PyMongo
+
+### Data Processing
+- Pandas
+- NumPy
+
+### Visualization
+- Matplotlib
+- Seaborn
+
+### Language & Speech Processing
+- SpeechRecognition
+- gTTS
+- deep-translator
+
+### Model Persistence
+- Joblib
+
+---
+
+## 🤖 Machine Learning Workflow
+
+### Data Preprocessing
+- Missing value handling
+- Symptom extraction and mapping
+- MultiLabelBinarizer for feature encoding
+- Label Encoding for disease labels
+
+### Model Training
+- Random Forest Classifier
+- 80:20 Train-Test Split
+- Noise injection for robustness testing
+
+### Model Evaluation
+- Accuracy Score
+- Precision
+- Recall
+- F1 Score
+- Confusion Matrix
+- 5-Fold Cross Validation
+
+---
+
+## 📊 Model Performance
+
+| Metric | Value |
+|----------|----------|
+| Test Accuracy | 84.04% |
+| Cross Validation Accuracy | 90.42% |
+| Diseases Covered | 41 |
+| Symptoms Supported | 131 |
+
+---
+
+## 📂 Project Structure
+
+```text
+Symptosure/
+│
+├── api.py
+├── predictor.py
+├── train_model.py
+├── evaluate_model.py
+├── feature_engineer.py
+├── data_prep.py
+│
+├── symptom_extractor.py
+├── symptom_mapping.py
+├── translator.py
+├── stt_tts.py
+│
+├── severity.py
+├── emergency.py
+├── disease_matcher.py
+│
+├── database.py
+│
+├── dataset.csv
+├── symptom_Description.csv
+├── symptom_precaution.csv
+├── disease_tests.csv
+│
+├── artifacts/
+│   ├── model.joblib
+│   ├── mlb.joblib
+│   └── label_encoder.joblib
+│
+├── requirements.txt
+└── README.md
 ```
 
-### 2. Install dependencies
+---
+
+## ⚙️ Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/your-username/symptosure.git
+cd symptosure
 ```
+
+### Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+### Activate Virtual Environment
+
+**Windows**
+
+```bash
+venv\Scripts\activate
+```
+
+**Linux / Mac**
+
+```bash
+source venv/bin/activate
+```
+
+### Install Dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-## ▶️ Running the Model API
+## ▶️ Run the Project
 
-Start the FastAPI inference server:
-```
-uvicorn api:app --host 0.0.0.0 --port 8000
+Start the FastAPI server:
+
+```bash
+uvicorn api:app --reload
 ```
 
-Open in browser:  
-**http://localhost:8000/docs**
+Open:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+to access the Swagger API documentation.
 
 ---
 
-## 📡 Example API Usage
+## 🗄️ Database
 
-### POST `/predict`
+MongoDB is used for:
 
-**Input**
-```json
-{
-  "text": "I have fever and body pain"
-}
-```
+- User Authentication
+- Prediction History
+- Generated Reports
+- User Data Management
 
-**Output**
-```json
-{
-  "predicted_disease": "Influenza"
-}
-```
+Default MongoDB Connection:
 
----
-
-## 🧠 Model
-
-The model uses classical ML techniques trained on symptom–disease mappings.  
-Pipeline includes:
-
-- Text preprocessing  
-- Symptom feature extraction  
-- One-hot encodings  
-- Model training  
-- Artifact saving  
-
-Artifacts are stored in the `/artifacts` directory.
-
----
-
-## 🌍 Multilingual Support
-
-Supported languages:
-- English  
-- Hindi  
-- Punjabi  
-
-Inputs are normalized internally before prediction.
-
----
-
-## 🐳 Docker Deployment
-
-Build image:
-```
-docker build -t symptom-checker .
-```
-
-Run container:
-```
-docker run -p 8000:8000 symptom-checker
+```text
+mongodb://localhost:27017
 ```
 
 ---
 
-## 🧪 Testing
+## 🔍 Research Gap Addressed
 
-Run the test suite:
-```
-pytest
-```
+Existing healthcare prediction systems mainly focus on disease prediction and often lack:
+
+- Severity classification
+- Emergency symptom detection
+- Multilingual support
+- Voice-based interaction
+- Healthcare guidance
+- Report generation
+- Prediction history tracking
+
+SYMPTOSURE addresses these limitations by integrating all these functionalities into a single AI-powered healthcare assistance platform.
 
 ---
 
-## 👩‍💻 Author
+## 🚀 Future Enhancements
 
-**Radha Sarda**  
-Machine Learning | AI | Deployment  
-Open to collaborations and improvements.
-
----
-
-## 📜 License
-
-Released under the MIT License.
-
+- Deep Learning-based prediction models
+- Mobile application support
+- Doctor consultation integration
+- Hospital recommendation system
+- Wearable device integration
+- Advanced NLP capabilities
 
